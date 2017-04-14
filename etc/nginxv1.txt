@@ -1,9 +1,6 @@
 server {
     
     listen 80 default;
-    proxy_set_header Host $host;
-    proxy_set_hedaer X-Real-IP $remote_addr;
-
 
     location ^~ /uploads/ {
       root /home/box/web;
@@ -16,8 +13,5 @@ server {
     location / {
       return 404;
     }
-
-    location ^~ /hello/ {
-      proxy-pass http//0.0.0.0:8080;
-    }
+  
   }
