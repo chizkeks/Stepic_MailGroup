@@ -1,10 +1,5 @@
-CONFIG = {
-    'mode': 'wsgi',
-    'working_dir': '/home/box/web/hello.py',
-    'args': (
-        '--bind=0.0.0.0:8080',
-        '--workers=16',
-        '--timeout=60',
-        'hello.app',
-    ),
-}
+bind='0.0.0.0:8080'
+accesslog='/home/box/web/log/gunicorn_access.log'
+errorlog='/home/box/web/log/gunicorn_error.log'
+pythonpath='/usr/bin/python3'
+pidfile='/home/box/web/pid/gupid.pid'
