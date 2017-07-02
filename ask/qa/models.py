@@ -1,23 +1,29 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
+class QuestionManager(models.Manager):
+    def new(self):
+        pass
+    def popular(self):
+        pass
+
 class Question(models.Model):
-    title = models.TextField() #заголовок вопроса
-    text = models.TextField() #полный текст вопроса
-    added_at = models.DateTimeField(blank = True, auto_now_add=True) #дата добавления вопроса
-    rating = models.IntegerField(default = 0) #рейтинг вопроса (число)
-    author = models.TextField() #автор вопроса
+    title = models.TextField()
+    text = models.TextField()
+    added_at = models.DateTimeField(blank = True, auto_now_add=True)
+    rating = models.IntegerField(default = 0)
+    author = models.TextField()
     likes = models.ManyToManyField(
         User,
-        through="Likes") #список пользователей, поставивших "лайк"
+        through="Likes")
     objects = QuestionManager()
 
-class Answer (models.Model):
-    text = models.TextField() #текст ответа
-    added_at = models.DateTimeField(blank = True, auto_now_add=True) #дата добавления ответа
-    question = models.TextField();
-    author = models.TextField() #автор вопроса
-
+class Answer(models.Model):
+    text = models.TextField()
+    added_at = models.DateTimeField(blank = True, auto_now_add=True)
+    question = models.TextField()
+    author = models.TextField()
 class Likes(models.Model):
     question = models.ForeignKey(
         Question,
@@ -27,10 +33,4 @@ class Likes(models.Model):
         User,
         related_name="users_likes"
     )
-
-class QuestionManager (models.Manager):
-    def new(self):
-        pass
-    def popular(self):
-        pass
 # Create your models here.
