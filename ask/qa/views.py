@@ -5,14 +5,14 @@ from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.core.paginator import Paginator, EmptyPage
-import ask.qa.models as md
+from .models import Question, QuestionManager, Answer
 
 def test(request, *args, **kwargs):
     return HttpResponse('OK')
 
 
 def new_questions(request):
-    lquestions = md.QuestionManager.new()
+    lquestions = QuestionManager.new()
     paginator, page = paginate(request, lquestions)
     paginator.baseurl = '/?page='
     return render (request,'templates/new_questions.html', {
@@ -21,7 +21,7 @@ def new_questions(request):
     })
 
 def popular_questions(request):
-    pquestions = md.QuestionManager.popular()
+    pquestions = QuestionManager.popular()
     paginator, page = paginate(request, pquestions)
     paginator.baseurl = '/popular/?page='
     return render (request,'templates/popular_questions.html', {
@@ -32,14 +32,10 @@ def popular_questions(request):
 def question_text(request, question_id):
 
     """POST and GET methods needed"""
-    q = get_object_or_404(md.Question, id=question_id)
-    a = q.answer_set
-    #a = Answer.objects.filter(question=question_id).order_by('-added_at')
-    return render(request, 'qa/question.html',  {
-      'questions': page.object_list,
-      'paginator': paginator, 'page': page,
-    })
-
+    q = get_object_or_404(Question, id=question_id)
+    q = get_object_or_404(Question, id=question_id)
+    a = Answer.objects.filter(question=question_id).order_by('-added_at')
+    return render(request, 'qa/question.html', {'question': q, 'answers': a, 'form': form, })
 
 
 def paginate(request, sqs):

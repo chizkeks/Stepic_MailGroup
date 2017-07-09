@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Popular Questions</title>
+</head>
 <body>
     {% for q in questions %}
     <h3>{{ q.title }}</h3>
-    <p><a href="q.get_absolute_url">
-    {{ answers }} Answer(s)</a>
-     </p>
+    <p><a href = "{{ q.get_absolute_url }}"> {{ q.title }} </a></p><br>
     {% endfor %}
-</head>
 </body>
 </html>
