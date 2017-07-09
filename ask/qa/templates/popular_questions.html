@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Popular Questions</title>
+<body>
+    {% for q in questions %}
+    <h3>{{ q.title }}</h3>
+    <p><a href="q.get_absolute_url">
+    {{ answers }} Answer(s)</a>
+     </p>
+    {% endfor %}
+</head>
+</body>
+</html>

@@ -1,29 +1,45 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.core.urlresolvers import reverse
 
 class QuestionManager(models.Manager):
     def new(self):
-        pass
+        new_questions = Question.objects.order_by('-added_at')
+        return new_questions
     def popular(self):
-        pass
+        pop_questions = Question.objects.order_by('-rating')
+        return pop_questions
 
 class Question(models.Model):
-    title = models.TextField()
+    objects = QuestionManager()
+    title = models.CharField(max_length=255)
     text = models.TextField()
     added_at = models.DateTimeField(blank = True, auto_now_add=True)
     rating = models.IntegerField(default = 0)
-    author = models.TextField()
+    author = models.ForeignKey(User, related_name="post_author")
     likes = models.ManyToManyField(
         User,
         through="Likes")
-    objects = QuestionManager()
+
+    def get_absolute_url(self):
+        return reverse('question', kwargs={"id": self.pk})
+
+    def __unicode__(self):
+        return self.title
 
 class Answer(models.Model):
     text = models.TextField()
     added_at = models.DateTimeField(blank = True, auto_now_add=True)
-    question = models.TextField()
-    author = models.TextField()
+    question = models.ForeignKey(Question, related_name="answer_of_question")
+    author = models.ForeignKey(User, related_name="answer_author")
+
+    def get_url(self):
+        return reverse('question', kwargs={'question_id': self.question.id})
+
+    def __unicode__(self):
+        return "Answer by {0} to question {1}: {2}...".\
+            format(self.author.username, self.question.id, self.text[:50])
+
 class Likes(models.Model):
     question = models.ForeignKey(
         Question,
