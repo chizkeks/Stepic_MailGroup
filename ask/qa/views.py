@@ -35,7 +35,7 @@ def question_text(request, question_id):
     q = get_object_or_404(Question, id=question_id)
     q = get_object_or_404(Question, id=question_id)
     a = Answer.objects.filter(question=question_id).order_by('-added_at')
-    return render(request, 'qa/question.html', {'question': q, 'answers': a, 'form': form, })
+    return render(request, 'qa/question.html', {'question': q, 'answers': a, })
 
 
 def paginate(request, sqs):
