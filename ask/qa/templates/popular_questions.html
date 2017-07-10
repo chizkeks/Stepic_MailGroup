@@ -7,7 +7,7 @@
 <body>
     {% for q in questions %}
     <h3>{{ q.title }}</h3>
-    <p><a href = "{{ q.get_absolute_url }}"> {{ q.title }} </a></p><br>
+    <p><a href = "{{ q.get_url }}"> {{ q.title }} </a></p><br>
     {% endfor %}
 </body>
 </html>

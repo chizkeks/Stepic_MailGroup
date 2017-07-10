@@ -3,7 +3,7 @@
 <head><title>Questions and Answers</title></html>
 
 {% for q in questions %}
-<p><a href = "{{ q.get_absolute_url }}"> {{ q.title }} </a></p><br>
+<p><a href = "{{ q.get_url }}"> {{ q.title }} </a></p><br>
 {% endfor %}
 
 <nav> <ul class = "paginator">

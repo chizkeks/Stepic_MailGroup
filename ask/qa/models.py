@@ -21,8 +21,8 @@ class Question(models.Model):
         User,
         through="Likes")
 
-    def get_absolute_url(self):
-        return reverse('question', kwargs={"id": self.id})
+    def get_url(self):
+        return reverse('question', kwargs={'question_id': self.id})
 
     def __unicode__(self):
         return self.title
@@ -30,8 +30,8 @@ class Question(models.Model):
 class Answer(models.Model):
     text = models.TextField()
     added_at = models.DateTimeField(blank = True, auto_now_add=True)
-    question = models.ForeignKey(Question, related_name="answer_of_question")
-    author = models.ForeignKey(User, related_name="answer_author")
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def get_url(self):
         return reverse('question', kwargs={'question_id': self.question.id})
