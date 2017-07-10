@@ -1,19 +1,15 @@
-<!DOCTYPE HTML>
-<html>
-<head><title>Questions and Answers</title></html>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
 {% for q in questions %}
-<p><a href = "{{ q.get_url }}"> {{ q.title }} </a></p><br>
+  <h3>{{ q.title }}</h3>
+  {% with answers=q.answer_set.count %}
+  <p><a href="{{ q.get_url }}/">
+     {{ answers }} Answer(s)</a>
+  </p>
 {% endfor %}
-
-<nav> <ul class = "paginator">
-{% for p in paginator.page_range %}
-    {% if p == page.number %}
-    <li class = "active">
-    {% else %}
-    <li>
-    {% endif %}
-        <a href="{{ paginator.baseurl }}{{ p }}"> {{ p }} </a>
-    </li>
-    {% endfor %}
-    </ul> </nav>
+</body>
+</html>

@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
+    <title> Question {{ question.id }} {{ page }}</title>
 </head>
 <body>
-    {% for q in questions %}
-    <h3>{{ q.title }}</h3>
-    <p><a href="/question/{{ q.id }}/">
-    {{ answers }} Answer(s)</a>
-     </p>
-    {% endfor %}
+<h1>{{ question.title }}</h1>
+<p>{{ question.text }}</p>
+
+<ul>
+  {% for a in answers %}
+  <li>{{ a.text }}</li>
+  {% endfor %}
+</ul>
 </body>
 </html>

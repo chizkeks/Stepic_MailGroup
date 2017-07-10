@@ -29,9 +29,10 @@ def popular_questions(request):
       'paginator': paginator, 'page': page,
     })
 
-def question_text(request, question_id):
-    q = get_object_or_404(Question, id=question_id)
-    a = Answer.objects.filter(question=question_id).order_by('-added_at')
+def question_text(request):
+    qid = int(request.GET.get('page', 1))
+    q = get_object_or_404(Question, id=qid)
+    a = Answer.objects.filter(question=qid).order_by('-added_at')
     return render(request, 'qa/question.html', {'question': q, 'answers': a, })
 
 
