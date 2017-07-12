@@ -14,19 +14,17 @@ def test(request, *args, **kwargs):
 def new_questions(request):
     lquestions = QuestionManager.new()
     paginator, page = paginate(request, lquestions)
-    paginator.baseurl = '/?page='
-    return render (request,'templates/new_questions.html', {
-      'questions': page.object_list,
-      'paginator': paginator, 'page': page,
+    return render (request,'qa/new_questions.html', {
+      'questions': page,
+      'paginator': paginator,
     })
 
 def popular_questions(request):
     pquestions = QuestionManager.popular()
     paginator, page = paginate(request, pquestions)
-    paginator.baseurl = '/popular/?page='
-    return render (request,'templates/popular_questions.html', {
-      'questions': page.object_list,
-      'paginator': paginator, 'page': page,
+    return render (request,'qa/popular_questions.html', {
+      'questions': page,
+      'paginator': paginator,
     })
 
 def question_text(request):
