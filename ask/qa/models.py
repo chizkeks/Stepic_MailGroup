@@ -17,9 +17,7 @@ class Question(models.Model):
     added_at = models.DateTimeField(blank = True, auto_now_add=True)
     rating = models.IntegerField(default = 0)
     author = models.ForeignKey(User, related_name="post_author")
-    likes = models.ManyToManyField(
-        User,
-        through="Likes")
+    likes = models.ManyToManyField(User, related_name='likes')
 
     def get_url(self):
         return reverse('question', kwargs={'question_id': self.id})
@@ -40,13 +38,13 @@ class Answer(models.Model):
         return "Answer by {0} to question {1}: {2}...".\
             format(self.author.username, self.question.id, self.text[:50])
 
-class Likes(models.Model):
-    question = models.ForeignKey(
-        Question,
-        related_name="question_likes"
-    )
-    user = models.ForeignKey(
-        User,
-        related_name="users_likes"
-    )
+#class Likes(models.Model):
+  #  question = models.ForeignKey(
+   #     Question,
+   #     related_name="question_likes"
+  #  )
+ #   user = models.ForeignKey(
+ #       User,
+ #       related_name="users_likes"
+ #   )
 # Create your models here.
