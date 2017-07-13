@@ -69,7 +69,7 @@ TEMPLATES = [
     },
 ]
 
-TEMPLATE_DIRS = "/ask/qa/templates/"
+TEMPLATE_DIRS = ("/ask/qa/templates/",)
 
 WSGI_APPLICATION = 'ask.wsgi.application'
 
@@ -82,11 +82,6 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         #'ENGINE': 'django.db.backends.mysql',
-        'USER': 'ipweb',
-        # export DB_PASSWORD=your_passwd
-        'PASSWORD': os.getenv('qazmlp6'),
-        #'HOST': '127.0.0.1',
-        #'PORT': '3306',
     }
 }
 # Password validation
