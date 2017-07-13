@@ -18,7 +18,7 @@ class Question(models.Model):
     rating = models.IntegerField(default = 0)
     author = models.TextField()
     likes = models.ManyToManyField(
-        User, related_name="related_name='likes'", blank=True)
+        User, related_name="likes", blank=True)
     objects = QuestionManager()
 
     def get_url(self):

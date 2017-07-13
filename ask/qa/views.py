@@ -31,7 +31,7 @@ def paginate(request, qs):
     return page, paginator
 
 def fresh_questions(request):
-    nq = QuestionManager.new()
+    nq = Question.objects.all().order_by('-id')
     page, paginator = paginate(request, nq)
     paginator.baseurl = reverse('new_questions') + '?page='
 
@@ -42,7 +42,7 @@ def fresh_questions(request):
     })
 
 def popular(request):
-    pq = QuestionManager.popular()
+    pq = Question.objects.order_by('-rating')
     page, paginator = paginate(request, pq)
     paginator.baseurl = reverse('popular') + '?page='
 
