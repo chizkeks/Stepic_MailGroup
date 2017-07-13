@@ -14,7 +14,7 @@ def test(request, *args, **kwargs):
 def new_questions(request):
     lquestions = QuestionManager.new()
     paginator, page = paginate(request, lquestions)
-    return render (request,'qa/new_questions.html', {
+    return render (request, 'qa/new_questions.html', {
       'questions': page,
       'paginator': paginator,
     })
@@ -22,7 +22,7 @@ def new_questions(request):
 def popular_questions(request):
     pquestions = QuestionManager.popular()
     paginator, page = paginate(request, pquestions)
-    return render (request,'qa/popular_questions.html', {
+    return render (request, 'qa/popular_questions.html', {
       'questions': page,
       'paginator': paginator,
     })

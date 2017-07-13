@@ -6,7 +6,6 @@
 <body>
 {% for q in questions %}
   <h3>{{ q.title }}</h3>
-  {% with answers=q.answer_set.count %}
   <p><a href="{{ q.get_url }}/">
      {{ answers }} Answer(s)</a>
   </p>
