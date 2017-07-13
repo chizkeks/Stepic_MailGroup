@@ -1,0 +1,13 @@
+{% extends 'qa/base.html' %}
+
+{% block title %}
+    Popular Questions - Page {{ questions.number }}{{ page }}
+{% endblock %}
+
+{% block content %}
+{% for question in questions %}
+  <h3>{{ question.title }}</h3>
+  <p><a href="{{ question.get_url }}/"> {{ question.title }}</a>
+  </p>
+{% endfor %}
+{% endblock %}
