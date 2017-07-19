@@ -42,7 +42,7 @@ class AnswerForm(forms.Form):
          except ValueError:
             raise forms.ValidationError('Invalid data',
                                         code='validation_error')
-         return question
+         return self.cleaned_data
 
     def save(self):
         self.cleaned_data['question'] = get_object_or_404(Question, pk=self.cleaned_data['question'])
