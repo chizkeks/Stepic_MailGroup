@@ -14,7 +14,7 @@ class AskForm(forms.Form):
             raise forms.ValidationError('Title is empty',
                                         code='validation_error')
         return self.cleaned_data
-    
+
     def clean_text(self):
         text = self.cleaned_data['text']
         if text.strip() == "":

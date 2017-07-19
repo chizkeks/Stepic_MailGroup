@@ -67,11 +67,10 @@ def questions(request, qid):
 
 def ask_q(request):
     if request.method == "POST":
-        form = AnswerForm(request.POST)
+        form = AskForm(request.POST)
         if form.is_valid():
-            print("Answer is valid")
-            answer = form.save()
-            url = answer.get_url()
+            question = form.save()
+            url = question.get_url()
             return HttpResponseRedirect(url)
     else:
         form = AskForm()
@@ -79,9 +78,9 @@ def ask_q(request):
 
 def answer_q(request):
       if request.method == "POST":
-        form = AskForm(request.POST)
+        form = AnswerForm(request.POST)
         if form.is_valid():
-            question = form.save()
-            url = question.get_url()
+            answer = form.save()
+            url = answer.get_url()
             return HttpResponseRedirect(url)
       return HttpResponseRedirect('/')
