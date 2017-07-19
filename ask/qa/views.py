@@ -58,9 +58,11 @@ def questions(request, qid):
     q = get_object_or_404(Question, id=qid)
     a = q.answer_set.all()
     #a = Answer.objects.filter(question=question_id).order_by('-added_at')
+    form = AnswerForm(initial = {'question': qid})
     return render(request, 'qa/question.html', {
         'question': q,
         'answers': a,
+        'form': form,
     })
 
 def ask_q(request):
