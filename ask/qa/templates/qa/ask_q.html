@@ -2,7 +2,7 @@
   <div class="alert alert-danger">{{ e }}</div>
 {% endfor %}
 
-  <form class="form-horizontal" method="POST" action="">
+  <form class="form-horizontal" method="POST" action="/ask/">
       <fieldset>
 	  {% csrf_token %}
 	  {% for field in form %}

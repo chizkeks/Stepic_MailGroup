@@ -10,22 +10,6 @@
 
 <p>{{ question.text }}</p>
 
-<h2>Answers:</h2>
-<ul>
-
-  {% for a in answers %}
-  <li><div class="answer">
-        <p class="info">
-          Answer by {{ a.author }} [{{ a.added_at }}]
-        </p>
-        {{ a.text|linebreaks }}
-      </div>
-      {% empty %}
-      <p>There are no answers yet.</p>
-    </li>
-  {% endfor %}
-</ul>
-
 <form class="form-horizontal" method="POST" action="/answer/">
       <fieldset>
 	  {% csrf_token %}
@@ -41,4 +25,21 @@
 	  <button type="submit" class="btn btn-primary">Submit</button>
       </div>
   </form>
+
+
+<h2>Answers:</h2>
+<ul>
+  {% for a in answers %}
+  <li><div class="answer">
+        <p class="info">
+          Answer by {{ a.author }} [{{ a.added_at }}]
+        </p>
+        {{ a.text|linebreaks }}
+      </div>
+      {% empty %}
+      <p>There are no answers yet.</p>
+    </li>
+  {% endfor %}
+</ul>
+
 {% endblock %}
