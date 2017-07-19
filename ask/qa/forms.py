@@ -13,12 +13,13 @@ class AskForm(forms.Form):
         if title.strip() == "":
             raise forms.ValidationError('Title is empty',
                                         code='validation_error')
-        return title
+        return self.cleaned_data
+    
     def clean_text(self):
         text = self.cleaned_data['text']
         if text.strip() == "":
             raise forms.ValidationError('Text is empty', code='validation_error')
-        return text
+        return self.cleaned_data
 
     def save(self):
         question = Question(**self.cleaned_data)
@@ -42,7 +43,7 @@ class AnswerForm(forms.Form):
          except ValueError:
             raise forms.ValidationError('Invalid data',
                                         code='validation_error')
-         return self.cleaned_data
+         return question
 
     def save(self):
         self.cleaned_data['question'] = get_object_or_404(Question, pk=self.cleaned_data['question'])
