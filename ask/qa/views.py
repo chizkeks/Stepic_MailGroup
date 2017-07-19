@@ -71,8 +71,7 @@ def ask_q(request):
         if form.is_valid():
             question = form.save()
             #url = question.get_url()
-            url = reverse('question_detail', args=[question.id])
-            return HttpResponseRedirect(url)
+            return HttpResponseRedirect(reverse('question_detail', args=[question.id]))
     else:
         form = AskForm()
     return render(request, 'qa/ask_q.html', {'form': form})
@@ -83,6 +82,5 @@ def answer_q(request):
         if form.is_valid():
             answer = form.save()
             #url = answer.get_url()
-            url = reverse('question_detail', args=[answer.question.id])
-            return HttpResponseRedirect(url)
+            return HttpResponseRedirect(reverse('question_detail', args=[answer.question.id]))
       return HttpResponseRedirect('/')
