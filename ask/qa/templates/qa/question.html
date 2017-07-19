@@ -1,17 +1,29 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title> Question {{ question.id }} {{ page }}</title>
-</head>
-<body>
+{% extends 'qa/base.html' %}
+
+{% block title %} Question {{ questions.id }}{{ page }} {% endblock %}
+
+{% block content %}
 <h1>{{ question.title }}</h1>
+<p class="submitted">
+    Published {{ question.added_at }} by {{ question.author }}
+  </p>
+
 <p>{{ question.text }}</p>
 
+<h2>Answers:</h2>
 <ul>
+
   {% for a in answers %}
-  <li>{{ a.text }}</li>
+  <li><div class="answer">
+        <p class="info">
+          Answer by {{ a.author }} [{{ a.added_at }}]
+        </p>
+        {{ a.text|linebreaks }}
+      </div>
+      {% empty %}
+      <p>There are no answers yet.</p>
+    </li>
   {% endfor %}
 </ul>
-</body>
-</html>
+
+{% endblock %}

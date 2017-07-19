@@ -4,23 +4,25 @@ from django.core.urlresolvers import reverse
 
 class QuestionManager(models.Manager):
     def new(self):
-        new_questions = Question.objects.order_by('-added_at')
+        new_questions = Question.objects.all().order_by('-id')
         return new_questions
+
     def popular(self):
         pop_questions = Question.objects.order_by('-rating')
         return pop_questions
 
 class Question(models.Model):
-    objects = QuestionManager()
-    title = models.CharField(max_length=255)
-    text = models.TextField()
+    title = models.TextField()
+    text = models.TextField(max_length=255)
     added_at = models.DateTimeField(blank = True, auto_now_add=True)
     rating = models.IntegerField(default = 0)
-    author = models.ForeignKey(User, related_name="post_author")
-    likes = models.ManyToManyField(User, related_name='likes')
+    author = models.TextField()
+    likes = models.ManyToManyField(
+        User, related_name="likes", blank=True)
+    objects = QuestionManager()
 
     def get_url(self):
-        return reverse('question', kwargs={'question_id': self.id})
+        return reverse('question_details', kwargs={'qid': self.id})
 
     def __unicode__(self):
         return self.title
@@ -32,19 +34,9 @@ class Answer(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def get_url(self):
-        return reverse('question', kwargs={'question_id': self.question.id})
+        return reverse('question_details', kwargs={'question_id': self.question.id})
 
     def __unicode__(self):
         return "Answer by {0} to question {1}: {2}...".\
             format(self.author.username, self.question.id, self.text[:50])
-
-#class Likes(models.Model):
-  #  question = models.ForeignKey(
-   #     Question,
-   #     related_name="question_likes"
-  #  )
- #   user = models.ForeignKey(
- #       User,
- #       related_name="users_likes"
- #   )
 # Create your models here.

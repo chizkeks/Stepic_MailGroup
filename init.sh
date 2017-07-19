@@ -1,6 +1,6 @@
-sudo pip3 install django mysqlclient
+﻿sudo pip3 install django mysqlclient
 sudo /etc/init.d/mysql start
-mysql -uroot -e "create database if not exists qa_question;"
+mysql -uroot -e "create database if not exists ask_answer"
 mysql -uroot -e "CREATE USER 'ipweb'@'localhost' IDENTIFIED BY 'qazmlp6';"
 mysql -uroot -e "GRANT ALL PRIVILEGES ON * . * TO 'ipweb'@'localhost';"
 mysql -uroot -e "FLUSH PRIVILEGES;"
